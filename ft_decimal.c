@@ -6,15 +6,19 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:12:35 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/01 15:12:35 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/01 15:50:54 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_putnbr(long nb, int flag)
+#include "ft_printf.h"
+
+void	ft_putnbr(va_list ap, int flag)
 {
+	long		nb;
 	const char	*hexa = "0123456789abcdef";
 	int			mod;
 
+	nb = va_arg(ap, long);
 	if (flag)
 		mod = 16;
 	else

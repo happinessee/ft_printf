@@ -6,25 +6,27 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:58:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/01 14:34:23 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:33:32 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-#include <stdarg.h>
-
 int	format(char *str, va_list ap, int *printf_len)
 {
-
+	if (*str == "c")
+		return (ft_putchar(ap));
+	else if (*str == "s")
+		return (ft_putstr(ap));
+	else if 
 	return (1);
 }
 
 int branch(char *str, va_list ap, int *printf_len)
 {
-	t_list	option;
+	t_flag	option;
 
-	ft_memset(option, 0,)
+	ft_memset(&option, 0, sizeof(t_flag));
 	return (1);
 }
 

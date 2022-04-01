@@ -6,11 +6,11 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:12:51 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/01 15:12:40 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/01 15:46:45 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "ft_printf.h"
 
 size_t	ft_strlen(char *str)
 {
