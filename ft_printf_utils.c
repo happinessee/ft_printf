@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 17:59:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/01 15:12:28 by hyojeong         ###   ########.fr       */
+/*   Created: 2022/04/01 13:12:51 by hyojeong          #+#    #+#             */
+/*   Updated: 2022/04/01 15:12:40 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-
 #include <stddef.h>
 
-int		ft_printf(const char *str, ...);
-size_t	ft_strlen(char *str);
-void	*ft_memset(void *b, int c, size_t len);
-void	ft_putnbr(long num, int flag);
-
-typedef	struct s_flag
+size_t	ft_strlen(char *str)
 {
-	long	hexa;
-	int		decimal;
-	int		zero_padding;
-	int		width;
-	int		space;
-	int		plus;
-	int		shop;
-	int		precision;
-	int		minus;
-}	t_flag;
+	size_t	cnt;
 
-#endif
+	cnt = 0;
+	while (str[cnt])
+		cnt++;
+	return (cnt);
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	size_t			i;
+	unsigned char	*memory;
+
+	i = 0;
+	memory = (unsigned char *)b;
+	while (i < len)
+	{
+		memory[i] = c;
+		i++;
+	}
+	return (memory);
+}
