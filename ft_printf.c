@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:58:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/01 17:33:32 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/05 12:47:44 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,12 @@ int	format(char *str, va_list ap, int *printf_len)
 		return (ft_putchar(ap));
 	else if (*str == "s")
 		return (ft_putstr(ap));
-	else if 
+	else if (*str == "p")
+		return (ft_putpoint(ap));
+	else if (*str == "d")
+		return (ft_putnum(ap));
+	else if (*str == "x" || *str == "X")
+		return (ft_putnum(ap));
 	return (1);
 }
 
@@ -26,15 +31,21 @@ int branch(char *str, va_list ap, int *printf_len)
 {
 	t_flag	option;
 
-	ft_memset(&option, 0, sizeof(t_flag));
-	return (1);
+	option = {0, };
+	while (!(str == 'd'))
+	{
+		if (str == ' ')
+			option.space = 1;
+	}
+	return (0);
 }
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
 	int		printf_len;
-
+	t_flag	flag;
+	
 	printf_len = 0;
 	if (str == 0)
 		return (-1);
