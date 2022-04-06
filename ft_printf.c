@@ -6,38 +6,50 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:58:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/05 12:47:44 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/06 17:24:55 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	format(char *str, va_list ap, int *printf_len)
+#include <unistd.h>
+
+void	set_flag(va_list ap, char **str, int *printf_len, t_flag *flag)
 {
-	if (*str == "c")
-		return (ft_putchar(ap));
-	else if (*str == "s")
-		return (ft_putstr(ap));
-	else if (*str == "p")
-		return (ft_putpoint(ap));
-	else if (*str == "d")
-		return (ft_putnum(ap));
-	else if (*str == "x" || *str == "X")
-		return (ft_putnum(ap));
-	return (1);
+	const char	*format = "# +-0";
+
+	while (ft_strchr(format, *str))
+	{
+		if (*str == '-')
+			flag->left = 1;
+		if (*str == '+')
+			flag->plus = 1;
+		if (*str == ' ')
+			flag->plus = 2;
+		if (*str == '#')
+			flag->hash = 1;
+		if (*str == '0')
+			flag->zero = 1;
+		(*str)++;
+	}
 }
 
-int branch(char *str, va_list ap, int *printf_len)
+void	set_width(va_list ap, char **str, int *printf_len, t_flag *flag)
 {
-	t_flag	option;
+	const char	*format = "123456789.";
+	int	right;
 
-	option = {0, };
-	while (!(str == 'd'))
+	right = 0;
+	while (ft_strchr(format, *str))
 	{
-		if (str == ' ')
-			option.space = 1;
+		if ((ft_strchr("123456789", *str)) && (right == 0))
+			flag->padding_left = *str - '0';
+		if (*str == '.')
+			right = 1;
+		if (ft_strchr("123456789") && (right == 1))
+			flag->padding_right = *str - '0';
+		(*str)++;
 	}
-	return (0);
 }
 
 int	ft_printf(const char *str, ...)
