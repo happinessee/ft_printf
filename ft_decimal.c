@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:12:35 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/06 17:29:32 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/06 20:14:32 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,27 @@ void	print_decimal(va_list ap, t_flag *flag)
 		flag->padding_left = 0;
 	if (flag->padding_right < len)
 		flag->padding_right = 0;
+	if (flag->plus || flag->space || num < 0)		// '.' 이 있을 때 +, -, ' ' 기호가 있다면 왼쪽에 ' ' 개수를 줄여주어야 함.
+		flag->padding_left--;
+	while (flag->padding_left - flag->padding_right > 0)
+	{
+		write(1, " ", 1);
+		flag->padding_left--;
+	}
+	if (flag->plus && !(flag->minus == 1))
+		write(1, "+", 1);
 	if (!flag->left)		// 왼쪽 정렬 ('-') 플래그가 아닐 때
 	{
-		while (flag->zero && flag->padding_left > idx + len)
+		while (flag->zero && (flag->padding_right >= idx + len)) // zero flag + 최소 넓이보다 길이가 작을 때 
 		{
 			write(1, "0", 1);
 			idx++;
-
 		}
+		while (flag->space && (flag->padding_right >= idx + len))
+		{
+			write(1, " ", 1);
+			idx++;
+		}
+		while ()
 	}
 }
