@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:58:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/07 17:30:30 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/07 18:27:52 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	branch(va_list ap, const char *str, int *printf_len)
 
 	(void)printf_len;
 	flag = make_flag((char *)str);
-	while (str)
+	while (*str)
 	{
 		if (*str == 'c')
 			;

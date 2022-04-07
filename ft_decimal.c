@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:12:35 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/07 17:41:31 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/07 18:52:16 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ size_t	get_numlen(size_t num, int flag)
 		mod = 16;
 	if (num < 0)
 		len++;
+	if (num == 0)
+		len = 1;
 	while (!(num == 0))
 	{
 		num = num / mod;
 		len++;
 	}
-	if (num == 0)
-		len = 1;
 	return (len);
 }
 
@@ -59,8 +59,7 @@ char	*itoa(int num, int hexa, t_flag *flag)
 	}
 	while (nb >= mod)
 	{
-		*str = hexanum[(nb % mod)];
-		str++;
+		ft_strlcat(str, &hexanum[(nb % mod)], ft_strlen(str) + 1);
 		nb = nb / mod;
 	}
 	*str = '\0';
@@ -75,7 +74,7 @@ void	print_decimal(va_list ap, t_flag *flag)
 	size_t	idx;
 
 	idx = 0;
-	num = va_arg(ap, long);
+	num = va_arg(ap, int);
 	len = get_numlen(num, flag->hexa);
 	res = itoa(num, flag->hexa, flag);
 	if (flag->padding_left < len)		// 최소, 최대 넓이보다 실제 출력할 숫자가 더 길때 
