@@ -6,11 +6,14 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:12:35 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/07 11:28:01 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/07 17:41:31 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+#include <unistd.h>
+#include <stdlib.h>
 
 size_t	get_numlen(size_t num, int flag)
 {
@@ -44,6 +47,8 @@ char	*itoa(int num, int hexa, t_flag *flag)
 	nb = num;
 	len = get_numlen(nb, hexa);
 	str = malloc(sizeof(char) * (len + 1));
+	if (str == 0)
+		return (0);
 	mod = 10;
 	if (hexa)
 		mod = 16;
@@ -58,7 +63,7 @@ char	*itoa(int num, int hexa, t_flag *flag)
 		str++;
 		nb = nb / mod;
 	}
-	str = '\0';
+	*str = '\0';
 	return (str);
 }
 
@@ -95,6 +100,29 @@ void	print_decimal(va_list ap, t_flag *flag)
 			idx++;
 		}
 		while (!(flag->plus) && (flag->padding_right >= idx + len)) // space flag padding
+		{
+			write(1, " ", 1);
+			idx++;
+		}
+		ft_putstr(res);
+	}
+	else	// '-' flag 로 왼쪽 정렬일때
+	{
+		if (flag->plus && !(flag->minus == 1))
+			write(1, &flag->plus, 1);
+		while (flag->zero && (flag->padding_right >= idx + len)) // zero flag padding
+		{
+			write(1, "0", 1);
+			idx++;
+		}
+		while (!(flag->plus) && (flag->padding_right >= idx + len)) // space flag padding
+		{
+			write(1, " ", 1);
+			idx++;
+		}
+		ft_putstr(res);
+		idx = 0;
+		while (flag->padding_left > flag->padding_right + idx)
 		{
 			write(1, " ", 1);
 			idx++;

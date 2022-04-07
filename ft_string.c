@@ -6,25 +6,21 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:17:47 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/01 15:46:33 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/07 17:55:45 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar(va_list ap)
-{
-	char	c;
+#include <unistd.h>
 
-	c = va_arg(ap, char);
+void	ft_putchar(char c)
+{
 	write(1, &c, 1);
 }
 
-void	ft_putstr(va_list ap)
+void	ft_putstr(char *str)
 {
-	char	*str;
-
-	str = va_arg(ap, char *);
 	size_t	idx;
 
 	idx = 0;
