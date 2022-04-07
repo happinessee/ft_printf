@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:59:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/06 17:32:39 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/07 11:18:25 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ typedef	struct s_flag
 	int		padding_right;
 	int		left;
 	int		width;
-	int		space;
-	int		plus;
+	char	plus;	// ' ', '+' 플래그는 동시에 사용 불가능하므로 겹치게 지정해줄것임. (d, i)
 	int		hash;
 	int		precision;
 	int		minus;
