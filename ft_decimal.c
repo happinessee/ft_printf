@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:12:35 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/08 12:22:15 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/08 13:56:19 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	print_decimal(va_list ap, t_flag *flag)
 		flag->padding_left--;
 	if (!flag->left)		// 왼쪽 정렬 ('-') 플래그가 아닐 때
 	{
-		if (flag->padding_right)
+		if (flag->padding_right)	// 최소  넓넓이이가  존존재재할할때때
 		{
 			while (flag->padding_left > flag->padding_right + idx)
 			{
@@ -91,11 +91,51 @@ void	print_decimal(va_list ap, t_flag *flag)
 		}
 		else
 		{
-			while ()
+			if (flag->zero && flag->plus)
+				write(1, &flag->plus, 1);
+			while (flag->zero && flag->padding_left > len + idx)
+			{
+				write(1, "0", 1);
+				idx++;
+			}
+			while (flag->padding_left > len + idx)
+			{
+				write(1, " ", 1);
+				idx++;
+			}
+			if (!(flag->zero) && flag->plus)
+				write(1, &flag->plus, 1);
+			ft_putnbr(num, flag->hexa);
 		}
 	}
 	else	// '-' flag 로 왼쪽 정렬일때
 	{
-		
+		if (flag->padding_right)
+		{
+			if (flag->plus)
+				write(1, &flag->plus, 1);
+			while (flag->padding_right > len + idx)
+			{
+				write(1, "0", 1);
+				idx++;
+			}
+			ft_putnbr(num, flag->hexa);
+			while (flag->padding_left > flag->padding_right + idx)
+			{
+				write(1, " ", 1);
+				idx++;
+			}
+		}
+		else
+		{
+			if (flag->plus)
+				write(1, &flag->plus, 1);
+			ft_putnbr(num, flag->hexa);
+			while (flag->padding_left > len + idx)
+			{
+				write(1, " ", 1);
+				idx++;
+			}
+		}
 	}
 }
