@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:58:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/07 18:27:52 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/08 11:16:11 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,29 @@ void	set_width(char **str, t_flag *flag)
 	}
 }
 
-t_flag	make_flag(char *str)
+t_flag	make_flag(char **str)
 {
 	t_flag	flag;
 
 	ft_memset(&flag, 0, sizeof(t_flag));
-	set_flag(&str, &flag);
-	set_width(&str, &flag);
+	set_flag(str, &flag);
+	set_width(str, &flag);
 	return (flag);
 }
 
-void	branch(va_list ap, const char *str, int *printf_len)
+void	branch(va_list ap, const char **str, int *printf_len)
 {
 	t_flag	flag;
 
 	(void)printf_len;
-	flag = make_flag((char *)str);
-	while (*str)
+	flag = make_flag((char **)str);
+	while (**str)
 	{
-		if (*str == 'c')
+		if (**str == 'c')
 			;
-		if (*str == 'd' || *str == 'i')
+		if (**str == 'd' || **str == 'i')
 			print_decimal(ap, &flag);
-		str++;
+		(*str)++;
 	}
 }
 // 메인 함수
@@ -90,7 +90,7 @@ int	ft_printf(const char *str, ...)
 		return (-1);
 	va_start(ap, str);
 	{
-		while (str)
+		while (*str)
 		{
 			if (!(*str == '%'))
 			{
@@ -101,7 +101,7 @@ int	ft_printf(const char *str, ...)
 			else
 			{
 				str++;
-				branch(ap, str, &printf_len);
+				branch(ap, &str, &printf_len);
 			}
 		}
 	}
