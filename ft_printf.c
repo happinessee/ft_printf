@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:58:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/08 11:16:11 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/08 16:26:02 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,18 @@ void	set_flag(char **str, t_flag *flag)
 // 너비를 계산해주는 함수
 void	set_width(char **str, t_flag *flag)
 {
-	const char	*format = "123456789.";
+	const char	*format = "0123456789.";
 	int	right;
 
 	right = 0;
 	while (ft_strchr(format, **str))
 	{
-		if ((ft_strchr("123456789", **str)) && (right == 0))
-			flag->padding_left = **str - '0';
+		if ((ft_strchr("0123456789", **str)) && (right == 0))
+			flag->padding_left = (flag->padding_left * 10) + **str - '0';
 		if (**str == '.')
 			right = 1;
-		if (ft_strchr("123456789", **str) && (right == 1))
-			flag->padding_right = **str - '0';
+		if (ft_strchr("0123456789", **str) && (right == 1))
+			flag->padding_right = (flag->padding_right * 10) + **str - '0';
 		(*str)++;
 	}
 }
@@ -72,10 +72,15 @@ void	branch(va_list ap, const char **str, int *printf_len)
 	flag = make_flag((char **)str);
 	while (**str)
 	{
-		if (**str == 'c')
-			;
+		if (**str == 'c' || **str == 's')
+			print_str(ap, &flag);
 		if (**str == 'd' || **str == 'i')
 			print_decimal(ap, &flag);
+		if (**str == '%')
+		{
+			write(1, "%", 1);
+			*printf_len++;
+		}
 		(*str)++;
 	}
 }
