@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:17:47 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/08 16:14:11 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/08 17:49:05 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ void	ft_putstr(char *str)
 		write(1, &str[idx], 1);
 		idx++;
 	}
+}
+
+print_char(va_list ap, t_flag *flag)
+{
+	
 }
 
 void	print_str(va_list ap, t_flag *flag)

@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:58:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/08 16:26:02 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/08 17:41:51 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,16 @@ void	branch(va_list ap, const char **str, int *printf_len)
 
 	(void)printf_len;
 	flag = make_flag((char **)str);
-	while (**str)
+	if (**str == 'c' || **str == 's')
+		print_str(ap, &flag);
+	if (**str == 'd' || **str == 'i')
+		print_decimal(ap, &flag);
+	if (**str == '%')
 	{
-		if (**str == 'c' || **str == 's')
-			print_str(ap, &flag);
-		if (**str == 'd' || **str == 'i')
-			print_decimal(ap, &flag);
-		if (**str == '%')
-		{
-			write(1, "%", 1);
-			*printf_len++;
-		}
-		(*str)++;
+		write(1, "%", 1);
+		(*printf_len)++;
 	}
+	(*str)++;
 }
 // 메인 함수
 int	ft_printf(const char *str, ...)
