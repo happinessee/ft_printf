@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:17:47 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/08 17:49:05 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/08 18:09:59 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,31 @@ void	ft_putstr(char *str)
 	}
 }
 
-print_char(va_list ap, t_flag *flag)
+void	print_char(va_list ap, t_flag *flag)
 {
-	
+	char	c;
+	size_t	idx;
+
+	idx = 0;
+	c = va_arg(ap, int);
+	if (flag->minus)
+	{
+		ft_putchar(c);
+		while (flag->padding_left > idx + 1)
+		{
+			write(1, " ", 1);
+			idx++;
+		}
+	}
+	else
+	{
+		while (flag->padding_left > idx + 1)
+		{
+			write(1, " ", 1);
+			idx++;
+		}
+		ft_putchar(c);
+	}
 }
 
 void	print_str(va_list ap, t_flag *flag)

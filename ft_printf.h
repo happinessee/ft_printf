@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:59:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/08 15:38:17 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/08 18:08:47 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ size_t	ft_strlen(char *str);
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_putchar(char c);
 void	ft_putstr(char *s);
+void	print_char(va_list ap, t_flag *flag);
 void	print_str(va_list ap, t_flag *flag);
 void	print_decimal(va_list ap, t_flag *flag);
 size_t  ft_strlcat(char *dst, const char *src, size_t dstsize);
