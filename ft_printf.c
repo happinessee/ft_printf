@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:58:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/08 18:08:19 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/08 18:49:43 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,15 @@ void	branch(va_list ap, const char **str, int *printf_len)
 		print_str(ap, &flag);
 	else if (**str == 'c')
 		print_char(ap, &flag);
-	else if (**str == 'd' || **str == 'i')
+	else if (**str == 'd' || **str == 'i' || **str == 'u' || **str == 'x' || **str == 'X')
 		print_decimal(ap, &flag);
 	else if (**str == '%')
 	{
 		write(1, "%", 1);
 		(*printf_len)++;
 	}
+	else if (**str == 'p')
+		print_pointer(ap, &flag);
 	(*str)++;
 }
 // 메인 함수

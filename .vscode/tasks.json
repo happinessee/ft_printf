@@ -11,6 +11,7 @@
 				"ft_string.c",
 				"ft_printf.h",
 				"ft_printf_utils.c",
+				"ft_pointer.c",
 				"main.c"
             ],
             "options": {
