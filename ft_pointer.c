@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:50:02 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/08 21:13:30 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/09 14:35:06 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_pointer(va_list ap, t_flag *flag)
 			write(1, " ", 1);
 			idx++;
 		}
-		while (cnt < 6)
+		while (cnt < 4)
 		{
 			ft_putnbr(*ptr, 1);
 			ptr++;
@@ -40,7 +40,7 @@ void	print_pointer(va_list ap, t_flag *flag)
 	}
 	else
 	{
-		while (cnt < 6)
+		while (cnt < 4)
 		{
 			ft_putnbr(*ptr, 1);
 			ptr++;
