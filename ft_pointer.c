@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:50:02 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/09 14:35:06 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/09 21:11:51 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_pointer(va_list ap, t_flag *flag)
 	int		cnt;
 	
 	cnt = 0;
-	ptr = va_arg(ap, unsigned char *);
+	ptr = va_arg(ap, void *);
 	write(1, "0x", 2);
 	idx = 2;
 	if (!(flag->minus))
@@ -33,7 +33,7 @@ void	print_pointer(va_list ap, t_flag *flag)
 		}
 		while (cnt < 4)
 		{
-			ft_putnbr(*ptr, 1);
+			ft_putnbr((unsigned long)(*ptr), 1);
 			ptr++;
 			cnt++;
 		}
@@ -42,7 +42,7 @@ void	print_pointer(va_list ap, t_flag *flag)
 	{
 		while (cnt < 4)
 		{
-			ft_putnbr(*ptr, 1);
+			ft_putnbr((unsigned long)*ptr, 1);
 			ptr++;
 			cnt++;
 		}
