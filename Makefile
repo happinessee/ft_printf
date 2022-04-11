@@ -9,7 +9,8 @@ SRCS= 	ft_printf.c /
 		ft_decimal.c /
 		ft_string.c /
 		ft_pointer.c /
-		
+		ft_hexa.c /
+
 
 INCS=	ft_printf.h
 

@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:59:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/08 21:11:02 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/11 19:09:13 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ typedef	struct s_flag
 int		ft_printf(const char *str, ...);
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(char *str);
+size_t	get_numlen(long num, int flag);
 void	*ft_memset(void *b, int c, size_t len);
-void	ft_putnbr(int num, int hexa);
+void	ft_putnbr(long num, int hexa);
 void	ft_putchar(char c);
 void	ft_putstr(char *s);
 void	print_char(va_list ap, t_flag *flag);

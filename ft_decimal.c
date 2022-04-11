@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:12:35 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/08 18:42:23 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/11 19:09:06 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ size_t	get_numlen(long num, int flag)
 	return (len);
 }
 
-void	ft_putnbr(int num, int hexa)
+void	ft_putnbr(long num, int hexa)
 {
-	const char	*hexanum = "0123456789abcdef";
-	long		nb;
-	int			mod;
+	const char		*hexanum = "0123456789abcdef";
+	long			nb;
+	int				mod;
 
 	nb = num;
 	mod = 10;
@@ -49,7 +49,9 @@ void	ft_putnbr(int num, int hexa)
 	if (nb < 0)
 		nb *= -1;
 	if (nb >= mod)
+	{
 		ft_putnbr(nb / mod, hexa);
+	}
 	write(1, &hexanum[(nb % mod)], 1);
 }
 
