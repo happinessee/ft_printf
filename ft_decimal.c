@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:12:35 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/11 19:09:06 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/12 14:29:49 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ void	print_decimal(va_list ap, t_flag *flag)
 		flag->padding_left = 0;
 	if (flag->padding_right < len)
 		flag->padding_right = 0;
+	if (flag->hexa && flag->hash)
+	{ 
+		flag->padding_left -= 2;
+		flag->plus = 0;
+	}
 	if (flag->plus || num < 0)		//  +, -, ' ' 기호가 있다면 padding 개수를 줄여주어야 함.
 		flag->padding_left--;
 	if (!flag->left)		// 왼쪽 정렬 ('-') 플래그가 아닐 때
@@ -84,6 +89,7 @@ void	print_decimal(va_list ap, t_flag *flag)
 			if (flag->plus)
 				write(1, &flag->plus, 1);
 			idx = 0;
+			ft_hexa(flag);
 			while (flag->padding_right > len + idx)
 			{
 				write(1, "0", 1);
@@ -93,8 +99,9 @@ void	print_decimal(va_list ap, t_flag *flag)
 		}
 		else
 		{
-			if (flag->zero && flag->plus)
+			if (flag->zero && flag->plus)	// 이건 뭐지?
 				write(1, &flag->plus, 1);
+			ft_hexa(flag);
 			while (flag->zero && flag->padding_left > len + idx)
 			{
 				write(1, "0", 1);
@@ -116,6 +123,7 @@ void	print_decimal(va_list ap, t_flag *flag)
 		{
 			if (flag->plus)
 				write(1, &flag->plus, 1);
+			ft_hexa(flag);
 			while (flag->padding_right > len + idx)
 			{
 				write(1, "0", 1);
@@ -132,6 +140,7 @@ void	print_decimal(va_list ap, t_flag *flag)
 		{
 			if (flag->plus)
 				write(1, &flag->plus, 1);
+			ft_hexa(flag);
 			ft_putnbr(num, flag->hexa);
 			while (flag->padding_left > len + idx)
 			{

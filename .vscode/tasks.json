@@ -12,6 +12,7 @@
 				"ft_printf.h",
 				"ft_printf_utils.c",
 				"ft_pointer.c",
+				"ft_hexa.c",
 				"main.c"
             ],
             "options": {

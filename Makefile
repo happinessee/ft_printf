@@ -4,27 +4,26 @@ CC= cc
 CFLAGS= -Wall -Wextra -Werror
 ARFLAGS= ar rcs
 
-SRCS= 	ft_printf.c /
-		ft_printf_utils.c /
-		ft_decimal.c /
-		ft_string.c /
-		ft_pointer.c /
-		ft_hexa.c /
-
+SRCS= 	ft_printf.c \
+		ft_printf_utils.c \
+		ft_decimal.c \
+		ft_string.c \
+		ft_pointer.c \
+		ft_hexa.c 
 
 INCS=	ft_printf.h
 
 OBJS= $(SRCS:.c=.o)
 
-%.o = %.c
+%.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I .
 
-$(NAME) = $(OBJS)
+$(NAME) : $(OBJS)
 	$(ARFLAGS) $@ $^
 
 all : $(NAME)
 
-clean : 
+clean :
 	rm -f $(OBJS)
 
 fclean : clean
@@ -34,4 +33,4 @@ re : fclean all
 
 bonus : $(NAME)
 
-.PHONY : all, clean, fclean, re, bonus
+.PHONY : all clean fclean re bonus

@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:59:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/11 19:09:13 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/12 12:56:53 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	print_char(va_list ap, t_flag *flag);
 void	print_str(va_list ap, t_flag *flag);
 void	print_decimal(va_list ap, t_flag *flag);
 void	print_pointer(va_list ap, t_flag *flag);
+void	ft_hexa(t_flag *flag);
 size_t  ft_strlcat(char *dst, const char *src, size_t dstsize);
 
 #endif

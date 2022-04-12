@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:50:02 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/11 19:04:09 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/12 12:20:53 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,10 @@ void	print_pointer(va_list ap, t_flag *flag)
 	
 	cnt = 0;
 	ptr = (unsigned long)va_arg(ap, void *);
-	write(1, "0x", 2);
 	idx = 2;
 	if (!(flag->minus))
 	{
-		while (flag->padding_left > 12 + idx) // 수수정  필필요요
+		while (flag->padding_left > 7 + idx) // 수수정  필필요요
 		{
 			write(1, " ", 1);
 			idx++;
@@ -36,6 +35,7 @@ void	print_pointer(va_list ap, t_flag *flag)
 			write(1, "0", 1);
 			idx++;
 		}
+		write(1, "0x", 2);
 		ft_putnbr((ptr), 1);
 		cnt++;
 	}
@@ -46,9 +46,10 @@ void	print_pointer(va_list ap, t_flag *flag)
 			write(1, "0", 1);
 			idx++;
 		}
+		write(1, "0x", 2);
 		ft_putnbr(ptr, 1);
 		cnt++;
-		while (flag->padding_left > 12 + idx)	// 수수정  필필요요
+		while (flag->padding_left > 7 + idx)	// 수수정  필필요요
 		{
 			write(1, " ", 1);
 			idx++;

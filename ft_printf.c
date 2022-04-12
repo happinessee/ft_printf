@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:58:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/08 18:49:43 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/12 14:43:48 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,13 @@ void	branch(va_list ap, const char **str, int *printf_len)
 	else if (**str == 'c')
 		print_char(ap, &flag);
 	else if (**str == 'd' || **str == 'i' || **str == 'u' || **str == 'x' || **str == 'X')
+	{
+		if (**str == 'x')
+			flag.hexa = 1;
+		else if (**str == 'X')
+			flag.hexa = 2;
 		print_decimal(ap, &flag);
+	}
 	else if (**str == '%')
 	{
 		write(1, "%", 1);
