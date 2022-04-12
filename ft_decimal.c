@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:12:35 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/12 14:29:49 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/12 17:46:46 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ size_t	get_numlen(long num, int flag)
 	mod = 10;
 	if (flag)
 		mod = 16;
-	if (num < 0)
-		len++;
 	if (num == 0)
 		len = 1;
 	while (!(num == 0))
@@ -55,11 +53,11 @@ void	ft_putnbr(long num, int hexa)
 	write(1, &hexanum[(nb % mod)], 1);
 }
 
-void	print_decimal(va_list ap, t_flag *flag)
+void	print_decimal(va_list ap, t_flag *flag, int *printf_len)
 {
 	long	num;
-	size_t	len;
-	size_t	idx;
+	long	len;
+	long	idx;
 
 	idx = 0;
 	num = va_arg(ap, int);
@@ -77,6 +75,8 @@ void	print_decimal(va_list ap, t_flag *flag)
 	}
 	if (flag->plus || num < 0)		//  +, -, ' ' 기호가 있다면 padding 개수를 줄여주어야 함.
 		flag->padding_left--;
+	if (flag->padding_left < 0)
+		flag->padding_left = 0;
 	if (!flag->left)		// 왼쪽 정렬 ('-') 플래그가 아닐 때
 	{
 		if (flag->padding_right)	// 최소  넓넓이이가  존존재재할할때때
@@ -84,36 +84,49 @@ void	print_decimal(va_list ap, t_flag *flag)
 			while (flag->padding_left > flag->padding_right + idx)
 			{
 				write(1, " ", 1);
+				(*printf_len)++;
 				idx++;
 			}
 			if (flag->plus)
+			{
 				write(1, &flag->plus, 1);
+				(*printf_len)++;
+			}
 			idx = 0;
-			ft_hexa(flag);
+			ft_hexa(flag, printf_len);
 			while (flag->padding_right > len + idx)
 			{
 				write(1, "0", 1);
+				(*printf_len)++;
 				idx++;
 			}
 			ft_putnbr(num, flag->hexa);
 		}
 		else
 		{
-			if (flag->zero && flag->plus)	// 이건 뭐지?
+			if (flag->zero && flag->plus)
+			{
 				write(1, &flag->plus, 1);
-			ft_hexa(flag);
+				(*printf_len)++;
+			}
+			ft_hexa(flag, printf_len);
 			while (flag->zero && flag->padding_left > len + idx)
 			{
 				write(1, "0", 1);
+				(*printf_len)++;
 				idx++;
 			}
 			while (flag->padding_left > len + idx)
 			{
 				write(1, " ", 1);
+				(*printf_len)++;
 				idx++;
 			}
 			if (!(flag->zero) && flag->plus)
+			{
 				write(1, &flag->plus, 1);
+				(*printf_len)++;
+			}
 			ft_putnbr(num, flag->hexa);
 		}
 	}
@@ -122,17 +135,22 @@ void	print_decimal(va_list ap, t_flag *flag)
 		if (flag->padding_right)
 		{
 			if (flag->plus)
+			{
 				write(1, &flag->plus, 1);
-			ft_hexa(flag);
+				(*printf_len)++;
+			}
+			ft_hexa(flag, printf_len);
 			while (flag->padding_right > len + idx)
 			{
 				write(1, "0", 1);
+				(*printf_len)++;
 				idx++;
 			}
 			ft_putnbr(num, flag->hexa);
 			while (flag->padding_left > flag->padding_right + idx)
 			{
 				write(1, " ", 1);
+				(*printf_len)++;
 				idx++;
 			}
 		}
@@ -140,13 +158,15 @@ void	print_decimal(va_list ap, t_flag *flag)
 		{
 			if (flag->plus)
 				write(1, &flag->plus, 1);
-			ft_hexa(flag);
+			ft_hexa(flag, printf_len);
 			ft_putnbr(num, flag->hexa);
 			while (flag->padding_left > len + idx)
 			{
 				write(1, " ", 1);
+				(*printf_len)++;
 				idx++;
 			}
 		}
 	}
+	*printf_len += get_numlen(num, flag->hexa);
 }
