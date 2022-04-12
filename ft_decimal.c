@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:12:35 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/12 17:46:46 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/12 18:41:59 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ void	print_decimal(va_list ap, t_flag *flag, int *printf_len)
 	long	idx;
 
 	idx = 0;
-	num = va_arg(ap, int);
+	if (flag->unsign || flag->hexa)
+		num = va_arg(ap, unsigned int);
+	else
+		num = va_arg(ap, int);
 	if (num < 0)
 		flag->plus = '-';
 	len = get_numlen(num, flag->hexa);
@@ -157,7 +160,10 @@ void	print_decimal(va_list ap, t_flag *flag, int *printf_len)
 		else
 		{
 			if (flag->plus)
+			{
 				write(1, &flag->plus, 1);
+				(*printf_len)++;
+			}
 			ft_hexa(flag, printf_len);
 			ft_putnbr(num, flag->hexa);
 			while (flag->padding_left > len + idx)

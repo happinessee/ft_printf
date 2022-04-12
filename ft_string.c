@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:17:47 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/12 15:50:53 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/12 18:43:53 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_putstr(char *str)
 void	print_char(va_list ap, t_flag *flag, int *printf_len)
 {
 	char	c;
-	size_t	idx;
+	long	idx;
 
 	idx = 0;
 	c = va_arg(ap, int);
@@ -70,8 +70,8 @@ void	print_char(va_list ap, t_flag *flag, int *printf_len)
 void	print_str(va_list ap, t_flag *flag, int *printf_len)
 {
 	char	*str;
-	size_t	idx;
-	size_t	len;
+	long	idx;
+	long	len;
 
 	idx = 0;
 	str = va_arg(ap, char *);
