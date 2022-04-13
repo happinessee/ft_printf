@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:12:35 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/12 18:41:59 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/13 13:00:24 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,25 @@ void	ft_putnbr(long num, int hexa)
 	if (nb >= mod)
 	{
 		ft_putnbr(nb / mod, hexa);
+	}
+	write(1, &hexanum[(nb % mod)], 1);
+}
+
+void	ft_put_X(unsigned int num, int hexa)
+{
+	const char	*hexanum = "0123456789ABCDEF";
+	long		nb;
+	int			mod;
+
+	nb = num;
+	mod = 10;
+	if (hexa)
+		mod = 16;
+	if (nb < 0)
+		nb *= -1;
+	if (nb >= mod)
+	{
+		ft_put_X(nb / mod, hexa);
 	}
 	write(1, &hexanum[(nb % mod)], 1);
 }
@@ -103,7 +122,10 @@ void	print_decimal(va_list ap, t_flag *flag, int *printf_len)
 				(*printf_len)++;
 				idx++;
 			}
-			ft_putnbr(num, flag->hexa);
+			if (flag->hexa == 2)
+				ft_put_X(num, flag->hexa);
+			else
+				ft_putnbr(num, flag->hexa);
 		}
 		else
 		{
@@ -130,7 +152,10 @@ void	print_decimal(va_list ap, t_flag *flag, int *printf_len)
 				write(1, &flag->plus, 1);
 				(*printf_len)++;
 			}
-			ft_putnbr(num, flag->hexa);
+			if (flag->hexa == 2)
+				ft_put_X(num, flag->hexa);
+			else
+				ft_putnbr(num, flag->hexa);
 		}
 	}
 	else	// '-' flag 로 왼쪽 정렬일때
@@ -149,7 +174,10 @@ void	print_decimal(va_list ap, t_flag *flag, int *printf_len)
 				(*printf_len)++;
 				idx++;
 			}
-			ft_putnbr(num, flag->hexa);
+			if (flag->hexa == 2)
+				ft_put_X(num, flag->hexa);
+			else
+				ft_putnbr(num, flag->hexa);
 			while (flag->padding_left > flag->padding_right + idx)
 			{
 				write(1, " ", 1);
@@ -165,7 +193,10 @@ void	print_decimal(va_list ap, t_flag *flag, int *printf_len)
 				(*printf_len)++;
 			}
 			ft_hexa(flag, printf_len);
-			ft_putnbr(num, flag->hexa);
+			if (flag->hexa == 2)
+				ft_put_X(num, flag->hexa);
+			else
+				ft_putnbr(num, flag->hexa);
 			while (flag->padding_left > len + idx)
 			{
 				write(1, " ", 1);
