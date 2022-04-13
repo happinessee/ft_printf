@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:17:47 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/13 16:35:40 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:27:33 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ void	print_char(va_list ap, t_flag *flag, int *printf_len)
 
 	idx = 0;
 	c = va_arg(ap, int);
-	if (flag->minus)
+	if (flag->left)
 	{
 		ft_putchar(c);
+		(*printf_len)++;
 		while (flag->padding_left > idx + 1)
 		{
 			write(1, " ", 1);
@@ -48,7 +49,7 @@ void	print_char(va_list ap, t_flag *flag, int *printf_len)
 		}
 	}
 	else
-{
+	{
 		while (flag->padding_left > idx + 1)
 		{
 			write(1, " ", 1);
@@ -86,7 +87,7 @@ void	print_str(va_list ap, t_flag *flag, int *printf_len)
 	}
 	if (str && flag->padding_right > len)
 		flag->padding_right = len;
-	if (flag->minus)	// 왼쪽 정렬이라면?
+	if (flag->left)	// 왼쪽 정렬이라면?
 	{
 		if (flag->precision)	// '.' 옵션이 있어서 최소 출력 길이가 존재한다면
 		{
@@ -95,9 +96,9 @@ void	print_str(va_list ap, t_flag *flag, int *printf_len)
 				ft_putstr(str, flag->padding_right);
 				*printf_len += flag->padding_right;
 				str += flag->padding_right;
-				idx++;
+				idx += flag->padding_right;
 			}
-			while (flag->padding_left > flag->padding_right + idx)
+			while (flag->padding_left > idx)
 			{
 				write(1, " ", 1);
 				(*printf_len)++;
