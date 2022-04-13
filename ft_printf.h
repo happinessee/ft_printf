@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:59:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/13 15:28:03 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/13 18:33:20 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(char *str);
 size_t	get_numlen(long num, int flag);
 void	*ft_memset(void *b, int c, size_t len);
-void	ft_putnbr(long num, int hexa);
+void	ft_putnbr(long num, t_flag flag);
 void	ft_putchar(char c);
 void	ft_putstr(char *s, long len);
 void	print_char(va_list ap, t_flag *flag, int *printf_len);
@@ -47,7 +47,7 @@ void	print_pointer(va_list ap, t_flag *flag, int *printf_len);
 void	ft_putptr(size_t num, int hexa);
 void	ft_put_uxX(unsigned int num, int hexa);
 size_t	get_unsignedlen(size_t num, int mod);
-void	ft_hexa(t_flag *flag, int *printf_len);
+void	ft_hexa(long num, t_flag *flag, int *printf_len);
 size_t  ft_strlcat1(char *dst, const char *src, size_t dstsize);
 
 #endif

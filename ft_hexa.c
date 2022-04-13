@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 17:39:02 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/12 18:44:16 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/13 18:33:28 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 #include <unistd.h>
 
-void	ft_hexa(t_flag *flag, int *printf_len)
+void	ft_hexa(long num, t_flag *flag, int *printf_len)
 {
-	if (flag->hexa && flag->hash)
+	if (flag->hexa && flag->hash && num)
 	{
-		if (flag->hash == 1)
+		if (flag->hexa == 1)
 			write(1, "0x", 2);
 		else
 			write(1, "0X", 2);
