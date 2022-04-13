@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:58:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/12 18:41:02 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:04:11 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,14 @@ void	set_flag(char **str, t_flag *flag)
 void	set_width(char **str, t_flag *flag)
 {
 	const char	*format = "0123456789.";
-	int	right;
 
-	right = 0;
 	while (ft_strchr(format, **str))
 	{
-		if ((ft_strchr("0123456789", **str)) && (right == 0))
+		if ((ft_strchr("0123456789", **str)) && (flag->precision == 0))
 			flag->padding_left = (flag->padding_left * 10) + **str - '0';
 		if (**str == '.')
-			right = 1;
-		if (ft_strchr("0123456789", **str) && (right == 1))
+			flag->precision = 1;
+		if (ft_strchr("0123456789", **str) && (flag->precision == 1))
 			flag->padding_right = (flag->padding_right * 10) + **str - '0';
 		(*str)++;
 	}

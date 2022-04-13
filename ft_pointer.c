@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:50:02 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/12 17:42:48 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/13 14:58:47 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	print_pointer(va_list ap, t_flag *flag, int *printf_len)
 	idx = 2;
 	if (!(flag->minus))
 	{
-		while (flag->padding_left > 7 + idx) // 수수정  필필요요
+		while ((unsigned long)flag->padding_left > get_unsignedlen(ptr, 1) + idx) // 수수정  필필요요
 		{
 			write(1, " ", 1);
 			(*printf_len)++;
@@ -85,7 +85,7 @@ void	print_pointer(va_list ap, t_flag *flag, int *printf_len)
 		ft_putptr(ptr, 1);
 		*printf_len += get_unsignedlen(ptr, 1);
 		cnt++;
-		while (flag->padding_left > 7 + idx)	// 수수정  필필요요
+		while ((unsigned long)flag->padding_left > get_unsignedlen(ptr, 1) + idx)	// 수수정  필필요요
 		{
 			write(1, " ", 1);
 			*printf_len += 1;

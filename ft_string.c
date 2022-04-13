@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:17:47 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/12 18:43:53 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/13 16:35:40 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,14 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_putstr(char *str)
+void	ft_putstr(char *str, long len)
 {
-	size_t	idx;
-
-	idx = 0;
 	if (str == 0)
 	{
-		write(1, "(null)", 6);
+		write(1, "(null)", len);
 		return ;
 	}
-	while (str[idx])
-	{
-		write(1, &str[idx], 1);
-		idx++;
-	}
+	write(1, str, len);
 }
 
 void	print_char(va_list ap, t_flag *flag, int *printf_len)
@@ -55,7 +48,7 @@ void	print_char(va_list ap, t_flag *flag, int *printf_len)
 		}
 	}
 	else
-	{
+{
 		while (flag->padding_left > idx + 1)
 		{
 			write(1, " ", 1);
@@ -76,21 +69,32 @@ void	print_str(va_list ap, t_flag *flag, int *printf_len)
 	idx = 0;
 	str = va_arg(ap, char *);
 	len = ft_strlen(str);
-	*printf_len += len;
 	if (str == 0)
 	{
-		*printf_len += 6;
-		len = 6;
+		if (flag->precision)
+		{
+			if (flag->padding_right < 7)
+				len = flag->padding_right;
+			else
+			{
+				len = 6;
+				flag->padding_right = 6;
+			}
+		}
+		else
+			len = 6;
 	}
+	if (str && flag->padding_right > len)
+		flag->padding_right = len;
 	if (flag->minus)	// 왼쪽 정렬이라면?
 	{
-		if (flag->padding_right)	// '.' 옵션이 있어서 최소 출력 길이가 존재한다면
+		if (flag->precision)	// '.' 옵션이 있어서 최소 출력 길이가 존재한다면
 		{
-			while (flag->padding_right > idx)
+			if (flag->padding_right > idx)
 			{
-				write(1, &(*str), 1);
-				(*printf_len)++;
-				str++;
+				ft_putstr(str, flag->padding_right);
+				*printf_len += flag->padding_right;
+				str += flag->padding_right;
 				idx++;
 			}
 			while (flag->padding_left > flag->padding_right + idx)
@@ -103,10 +107,14 @@ void	print_str(va_list ap, t_flag *flag, int *printf_len)
 		else
 		{
 			if (flag->padding_left < len)
-				ft_putstr(str);
+			{
+				ft_putstr(str, len);
+				*printf_len += len;
+			}
 			else
 			{
-				ft_putstr(str);
+				ft_putstr(str, len);
+				*printf_len += len;
 				while (flag->padding_left > len + idx)
 				{
 					write(1, " ", 1);
@@ -118,7 +126,7 @@ void	print_str(va_list ap, t_flag *flag, int *printf_len)
 	}
 	else	// 왼쪽 정렬이 아니라면??
 	{
-		if (flag->padding_right)
+		if (flag->precision)
 		{
 			while (flag->padding_left > flag->padding_right + idx)
 			{
@@ -127,18 +135,21 @@ void	print_str(va_list ap, t_flag *flag, int *printf_len)
 				idx++;
 			}
 			idx = 0;
-			while (flag->padding_right > idx)
+			if (flag->padding_right > idx)
 			{
-				write(1, &(*str), 1);
-				(*printf_len)++;
-				str++;
+				ft_putstr(str, flag->padding_right);
+				*printf_len += flag->padding_right;
+				str += flag->padding_right;
 				idx++;
 			}
 		}
 		else
 		{
 			if (flag->padding_left < len)
-				ft_putstr(str);
+			{
+				ft_putstr(str, len);
+				*printf_len += len;
+			}
 			else
 			{
 				while (flag->padding_left > len + idx)
@@ -147,7 +158,8 @@ void	print_str(va_list ap, t_flag *flag, int *printf_len)
 					(*printf_len)++;
 					idx++;
 				}
-				ft_putstr(str);
+				ft_putstr(str, len);
+				*printf_len += len;
 			}
 		}
 	}
