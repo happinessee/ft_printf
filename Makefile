@@ -7,6 +7,7 @@ ARFLAGS= ar rcs
 SRCS= 	ft_printf.c \
 		ft_printf_utils.c \
 		ft_decimal.c \
+		ft_char.c \
 		ft_string.c \
 		ft_pointer.c \
 		ft_hexa.c 

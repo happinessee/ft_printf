@@ -6,69 +6,30 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:17:47 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/13 17:27:33 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/14 00:02:02 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 #include <unistd.h>
-#include <stdlib.h>
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *str, long len)
+void	ft_putstr(char *str, long len, int *printf_len)
 {
 	if (str == 0)
 	{
 		write(1, "(null)", len);
+		*printf_len += len;
 		return ;
 	}
 	write(1, str, len);
+	*printf_len += len;
 }
 
-void	print_char(va_list ap, t_flag *flag, int *printf_len)
+static long	set_len_precision(t_flag *flag, char *str)
 {
-	char	c;
-	long	idx;
-
-	idx = 0;
-	c = va_arg(ap, int);
-	if (flag->left)
-	{
-		ft_putchar(c);
-		(*printf_len)++;
-		while (flag->padding_left > idx + 1)
-		{
-			write(1, " ", 1);
-			(*printf_len)++;
-			idx++;
-		}
-	}
-	else
-	{
-		while (flag->padding_left > idx + 1)
-		{
-			write(1, " ", 1);
-			(*printf_len)++;
-			idx++;
-		}
-		ft_putchar(c);
-		(*printf_len)++;
-	}
-}
-
-void	print_str(va_list ap, t_flag *flag, int *printf_len)
-{
-	char	*str;
-	long	idx;
 	long	len;
 
-	idx = 0;
-	str = va_arg(ap, char *);
 	len = ft_strlen(str);
 	if (str == 0)
 	{
@@ -87,81 +48,58 @@ void	print_str(va_list ap, t_flag *flag, int *printf_len)
 	}
 	if (str && flag->padding_right > len)
 		flag->padding_right = len;
-	if (flag->left)	// 왼쪽 정렬이라면?
+	return (len);
+}
+
+static void	is_precision(t_flag flag, char *str, int *printf_len)
+{
+	if (flag.left)
 	{
-		if (flag->precision)	// '.' 옵션이 있어서 최소 출력 길이가 존재한다면
-		{
-			if (flag->padding_right > idx)
-			{
-				ft_putstr(str, flag->padding_right);
-				*printf_len += flag->padding_right;
-				str += flag->padding_right;
-				idx += flag->padding_right;
-			}
-			while (flag->padding_left > idx)
-			{
-				write(1, " ", 1);
-				(*printf_len)++;
-				idx++;
-			}
-		}
+		if (flag.padding_right > 0)
+			ft_putstr(str, flag.padding_right, printf_len);
+		space_padding(flag.padding_left, flag.padding_right, printf_len);
+	}
+	else
+	{
+		space_padding(flag.padding_left, flag.padding_right, printf_len);
+		if (flag.padding_right > 0)
+			ft_putstr(str, flag.padding_right, printf_len);
+	}
+}
+
+static void	is_general(t_flag flag, char *str, long len, int *printf_len)
+{
+	if (flag.left)
+	{
+		if (flag.padding_left < len)
+			ft_putstr(str, len, printf_len);
 		else
 		{
-			if (flag->padding_left < len)
-			{
-				ft_putstr(str, len);
-				*printf_len += len;
-			}
-			else
-			{
-				ft_putstr(str, len);
-				*printf_len += len;
-				while (flag->padding_left > len + idx)
-				{
-					write(1, " ", 1);
-					(*printf_len)++;
-					idx++;
-				}
-			}
+			ft_putstr(str, len, printf_len);
+			space_padding(flag.padding_left, 0, printf_len);
 		}
 	}
-	else	// 왼쪽 정렬이 아니라면??
+	else
 	{
-		if (flag->precision)
-		{
-			while (flag->padding_left > flag->padding_right + idx)
-			{
-				write(1, " ", 1);
-				(*printf_len)++;
-				idx++;
-			}
-			idx = 0;
-			if (flag->padding_right > idx)
-			{
-				ft_putstr(str, flag->padding_right);
-				*printf_len += flag->padding_right;
-				str += flag->padding_right;
-				idx++;
-			}
-		}
+		if (flag.padding_left < len)
+			ft_putstr(str, len, printf_len);
 		else
 		{
-			if (flag->padding_left < len)
-			{
-				ft_putstr(str, len);
-				*printf_len += len;
-			}
-			else
-			{
-				while (flag->padding_left > len + idx)
-				{
-					write(1, " ", 1);
-					(*printf_len)++;
-					idx++;
-				}
-				ft_putstr(str, len);
-				*printf_len += len;
-			}
+			space_padding(flag.padding_left, 0, printf_len);
+			ft_putstr(str, len, printf_len);
 		}
 	}
+}
+
+void	print_str(va_list ap, t_flag *flag, int *printf_len)
+{
+	char	*str;
+	long	len;
+
+	str = va_arg(ap, char *);
+	len = set_len_precision(flag, str);
+	if (flag->precision)
+		have_precision(*flag, str, printf_len);
+	else
+		is_general(*flag, str, len, printf_len);
 }

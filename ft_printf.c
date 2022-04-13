@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:58:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/13 15:04:11 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/13 22:02:09 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-// flag option들을 지정해주는 함수
 void	set_flag(char **str, t_flag *flag)
 {
 	const char	*format = "# +-0";
@@ -36,7 +35,6 @@ void	set_flag(char **str, t_flag *flag)
 	}
 }
 
-// 너비를 계산해주는 함수
 void	set_width(char **str, t_flag *flag)
 {
 	const char	*format = "0123456789.";
@@ -92,7 +90,7 @@ void	branch(va_list ap, const char **str, int *printf_len)
 		print_pointer(ap, &flag, printf_len);
 	(*str)++;
 }
-// 메인 함수
+
 int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
