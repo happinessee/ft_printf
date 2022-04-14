@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:17:47 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/14 00:02:02 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/14 11:10:02 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ static void	is_precision(t_flag flag, char *str, int *printf_len)
 	{
 		if (flag.padding_right > 0)
 			ft_putstr(str, flag.padding_right, printf_len);
-		space_padding(flag.padding_left, flag.padding_right, printf_len);
+		padding(flag.padding_left, flag.padding_right, printf_len, ' ');
 	}
 	else
 	{
-		space_padding(flag.padding_left, flag.padding_right, printf_len);
+		padding(flag.padding_left, flag.padding_right, printf_len, ' ');
 		if (flag.padding_right > 0)
 			ft_putstr(str, flag.padding_right, printf_len);
 	}
@@ -76,7 +76,7 @@ static void	is_general(t_flag flag, char *str, long len, int *printf_len)
 		else
 		{
 			ft_putstr(str, len, printf_len);
-			space_padding(flag.padding_left, 0, printf_len);
+			padding(flag.padding_left, 0, printf_len, ' ');
 		}
 	}
 	else
@@ -85,7 +85,7 @@ static void	is_general(t_flag flag, char *str, long len, int *printf_len)
 			ft_putstr(str, len, printf_len);
 		else
 		{
-			space_padding(flag.padding_left, 0, printf_len);
+			padding(flag.padding_left, 0, printf_len, ' ');
 			ft_putstr(str, len, printf_len);
 		}
 	}

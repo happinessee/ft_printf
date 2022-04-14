@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 17:39:02 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/13 18:33:28 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/14 10:15:18 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,4 @@ void	ft_hexa(long num, t_flag *flag, int *printf_len)
 			write(1, "0X", 2);
 		*printf_len += 2;
 	}
-}
-
-void	ft_put_uxX(unsigned int num, int hexa)
-{
-	const char		*hexanum = "0123456789abcdef";
-	unsigned int	nb;
-	unsigned int	mod;
-
-	nb = num;
-	mod = 10;
-	if (hexa)
-		mod = 16;
-	if (nb >= mod)
-	{
-		ft_put_uxX(nb / mod, hexa);
-	}
-	write(1, &hexanum[(nb % mod)], 1);
 }

@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:50:02 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/14 10:13:44 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/14 11:10:28 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ size_t	get_unsignedlen(size_t num, int flag)
 	return (len);
 }
 
-void	action(unsigned long ptr, int *printf_len)
+static void	action(unsigned long ptr, int *printf_len)
 {
 	write(1, "0x", 2);
 	*printf_len += 2;
@@ -69,14 +69,14 @@ void	print_pointer(va_list ap, t_flag *flag, int *printf_len)
 	ptr = (unsigned long)va_arg(ap, void *);
 	if (!(flag->left))
 	{
-		space_padding(flag->padding_left, \
-			(get_unsignedlen(ptr, 1) + 2), printf_len);
+		padding(flag->padding_left, \
+			(get_unsignedlen(ptr, 1) + 2), printf_len, ' ');
 		action(ptr, printf_len);
 	}
 	else
 	{
 		action(ptr, printf_len);
-		space_padding(flag->padding_left, \
-			(get_unsignedlen(ptr, 1) + 2), printf_len);
+		padding(flag->padding_left, \
+			(get_unsignedlen(ptr, 1) + 2), printf_len, ' ');
 	}
 }
