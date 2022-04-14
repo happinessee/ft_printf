@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 23:29:42 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/14 11:09:10 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/14 12:06:08 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	padding(long left, long right, int *printf_len, int c)
 {
 	while (left > right)
 	{
-		write(1, &padding, 1);
+		write(1, &c, 1);
 		(*printf_len)++;
 		right++;
 	}

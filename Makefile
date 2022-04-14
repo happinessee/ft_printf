@@ -8,6 +8,7 @@ SRCS= 	ft_printf.c \
 		ft_printf_utils.c \
 		ft_printf_utils2.c \
 		ft_decimal.c \
+		ft_decimal2.c \
 		ft_char.c \
 		ft_string.c \
 		ft_pointer.c \

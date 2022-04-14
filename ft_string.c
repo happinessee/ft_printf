@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:17:47 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/14 11:10:02 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/14 12:11:28 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	is_general(t_flag flag, char *str, long len, int *printf_len)
 		else
 		{
 			ft_putstr(str, len, printf_len);
-			padding(flag.padding_left, 0, printf_len, ' ');
+			padding(flag.padding_left, len, printf_len, ' ');
 		}
 	}
 	else
@@ -85,7 +85,7 @@ static void	is_general(t_flag flag, char *str, long len, int *printf_len)
 			ft_putstr(str, len, printf_len);
 		else
 		{
-			padding(flag.padding_left, 0, printf_len, ' ');
+			padding(flag.padding_left, len, printf_len, ' ');
 			ft_putstr(str, len, printf_len);
 		}
 	}
@@ -99,7 +99,7 @@ void	print_str(va_list ap, t_flag *flag, int *printf_len)
 	str = va_arg(ap, char *);
 	len = set_len_precision(flag, str);
 	if (flag->precision)
-		have_precision(*flag, str, printf_len);
+		is_precision(*flag, str, printf_len);
 	else
 		is_general(*flag, str, len, printf_len);
 }
