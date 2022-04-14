@@ -6,14 +6,13 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:58:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/14 09:46:46 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/14 09:57:16 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 #include <unistd.h>
-#include <stdlib.h>
 
 void	set_flag(char **str, t_flag *flag)
 {
@@ -71,7 +70,8 @@ void	branch(va_list ap, const char **str, int *printf_len)
 		print_str(ap, &flag, printf_len);
 	else if (**str == 'c')
 		print_char(ap, &flag, printf_len);
-	else if (**str == 'd' || **str == 'i' || **str == 'u' || **str == 'x' || **str == 'X')
+	else if (**str == 'd' || **str == 'i' || **str == 'u' || \
+		**str == 'x' || **str == 'X')
 	{
 		if (**str == 'x')
 			flag.hexa = 1;
@@ -92,8 +92,8 @@ int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
 	int		printf_len;
-	
-	printf_len = 0;	
+
+	printf_len = 0;
 	if (str == 0)
 		return (-1);
 	va_start(ap, str);
