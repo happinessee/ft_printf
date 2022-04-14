@@ -6,15 +6,15 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:59:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/14 12:34:15 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/14 12:49:08 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-#include <stddef.h>
-#include <stdarg.h>
+# include <stddef.h>
+# include <stdarg.h>
 
 typedef struct s_flag
 {
