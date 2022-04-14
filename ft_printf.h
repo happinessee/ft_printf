@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:59:39 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/13 23:01:14 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/14 09:45:54 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_putptr(size_t num, int hexa);
 void	ft_put_uxX(unsigned int num, int hexa);
 void	ft_hexa(long num, t_flag *flag, int *printf_len);
 
+void	print_percent(int *printf_len);
 void	print_char(va_list ap, t_flag *flag, int *printf_len);
 void	print_str(va_list ap, t_flag *flag, int *printf_len);
 void	print_decimal(va_list ap, t_flag *flag, int *printf_len);
