@@ -6,7 +6,7 @@
 /*   By: hyojeong <hyojeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 13:12:51 by hyojeong          #+#    #+#             */
-/*   Updated: 2022/04/14 11:35:46 by hyojeong         ###   ########.fr       */
+/*   Updated: 2022/04/26 12:27:56 by hyojeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,4 @@ void	*ft_memset(void *b, int c, size_t len)
 		i++;
 	}
 	return (memory);
-}
-
-size_t	ft_strlcat1(char *dst, const char *src, size_t dstsize)
-{
-	size_t	index;
-	size_t	dst_len;
-	size_t	src_len;
-
-	index = 0;
-	dst_len = ft_strlen(dst);
-	src_len = ft_strlen((char *)src);
-	if (dstsize <= dst_len)
-		return (src_len + dstsize);
-	if (dst == 0 || src == 0)
-		return (0);
-	while (src[index] && dst_len + index + 1 < dstsize)
-	{
-		dst[dst_len + index] = src[index];
-		index++;
-	}
-	dst[dst_len + index] = 0;
-	return (dst_len + src_len);
 }
